@@ -53,52 +53,43 @@ public class Date implements Comparable<Date> {
 
     // CHECK THIS missing isValid idk how to do this part in code
     public boolean isValid() {
+        // check if a date is a valid calendar date
         boolean validBounds = this.withinBounds();
         boolean validDay = this.beforeToday();
 
-        if(validBounds && validDay)
+        if (validBounds && validDay)
             return true;
         else
             return false;
     }
 
     private boolean withinBounds() {
-        // check if a date is a valid calendar date
         if (this.year < MINY || this.year > MAXY) {
             return false;
         }
-        if(this.month > DEC || this.month < JAN) {
+        if (this.month > DEC || this.month < JAN) {
             return false;
         }
-        if(this.day > MAXDINM || this.day < MINDINM) {
+        if (this.day > MAXDINM || this.day < MINDINM) {
             return false;
         }
         return true;
     }
 
     private boolean beforeToday() {
-        if(this.year < MINY || this.year > MAXY){
+        if (this.year < MINY || this.year > MAXY) {
             return false;
         }
-        if(this.month > DEC || this.month < JAN) {
+        if (this.month > DEC || this.month < JAN) {
             return false;
         }
-        if(this.day > MAXDINM || this.day < MINDINM) {
+        if (this.day > MAXDINM || this.day < MINDINM) {
             return false;
         }
         return true;
     }
 
     // TO DO STILL: check if leap year, make days in m
-
-
-
-
-
-
-
-
-
 
     public int getYear() {
         return this.year;

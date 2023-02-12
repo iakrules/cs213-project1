@@ -1,8 +1,8 @@
 /*
- * 
+ *
  * @author Ishaan Keswani
  * @author
- * 
+ *
  */
 
 public class Student {
@@ -12,8 +12,10 @@ public class Student {
     // CHECK THIS incomplete
     private int creditCompleted;
 
-    public Student(String lname, String fname, Date dob) {
-        this.profile = new Profile(lname, fname, dob);
+    public Student(Profile profile, Major major, int credit) {
+        this.profile = profile;
+        this.major = major;
+        this.creditCompleted = credit;
     }
 
     @Override
