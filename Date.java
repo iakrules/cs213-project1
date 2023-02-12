@@ -14,6 +14,26 @@ public class Date implements Comparable<Date> {
 
     private String inDate;
 
+    private static final int JAN = 1;
+    private static final int FEB = 2;
+    private static final int MAR = 3;
+    private static final int MAY = 5;
+    private static final int JUL = 7;
+    private static final int AUG = 8;
+    private static final int OCT = 10;
+    private static final int DEC = 12;
+
+    private static final int MINY = 1923;
+    private static final int MAXY = 2023;
+    private static final int MINDINM = 1;
+    private static final int MAXDINM = 31;
+    private static final int DINM = 30;
+    private static final int DINLM = 29;
+
+    private static final int QUADRENNIAL = 4;
+    private static final int CENTENNIAL = 100;
+    private static final int QUATERCENTENNIAL = 400;
+
     public Date() {
         // create an object with today’s date (see Calendar class)
         Calendar now = Calendar.getInstance();
@@ -33,9 +53,52 @@ public class Date implements Comparable<Date> {
 
     // CHECK THIS missing isValid idk how to do this part in code
     public boolean isValid() {
+        boolean validBounds = this.withinBounds();
+        boolean validDay = this.beforeToday();
+
+        if(validBounds && validDay)
+            return true;
+        else
+            return false;
+    }
+
+    private boolean withinBounds() {
         // check if a date is a valid calendar date
+        if (this.year < MINY || this.year > MAXY) {
+            return false;
+        }
+        if(this.month > DEC || this.month < JAN) {
+            return false;
+        }
+        if(this.day > MAXDINM || this.day < MINDINM) {
+            return false;
+        }
         return true;
     }
+
+    private boolean beforeToday() {
+        if(this.year < MINY || this.year > MAXY){
+            return false;
+        }
+        if(this.month > DEC || this.month < JAN) {
+            return false;
+        }
+        if(this.day > MAXDINM || this.day < MINDINM) {
+            return false;
+        }
+        return true;
+    }
+
+    // TO DO STILL: check if leap year, make days in m
+
+
+
+
+
+
+
+
+
 
     public int getYear() {
         return this.year;
