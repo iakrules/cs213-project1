@@ -5,6 +5,11 @@ public class Roster {
     // CHECK THIS placeholder, incomplete
     int test;
 
+    public Roster() {
+        this.roster = new Student[1];
+        this.size = 0;
+    }
+
     private int find(Student student) {
         for (int i = 0; i < this.size; i++) {
             if (this.roster[i].equals(student)) {
@@ -17,17 +22,51 @@ public class Roster {
 
     private void grow() {
         // grow main array by 4
-        Student[] newProf = new Student[this.size + 4];
+        Student[] newProf = new Student[this.roster.length + 4];
         for (int i = 0; i < this.size; i++) {
             newProf[i] = this.roster[i];
         }
-        this.size += 4;
+        this.roster = newProf;
         // make a new array with a size greater by 4 and add everything to it (O(n))
     }
 
     public boolean add(Student student) {
         // add student to end of array
-        return false;
+        Date today = new Date();
+        boolean res = false;
+        if (contains(student)) {
+            return false;
+        }
+        if (this.size == this.roster.length) {
+            grow();
+            System.out.println("size = " + this.roster.length);
+        }
+        // this.roster[this.size] = student;
+        if (student.getProfile().getdob().getMonth() > today.getMonth()) {
+            if (today.getYear() - student.getProfile().getdob().getYear() > 16) {
+                res = true;
+            }
+        } else if (student.getProfile().getdob().getMonth() == today.getMonth()) {
+            if (today.getDay() >= student.getProfile().getdob().getDay()) {
+                if (today.getYear() - student.getProfile().getdob().getYear() >= 16) {
+                    res = true;
+                }
+            } else if (today.getYear() - student.getProfile().getdob().getYear() > 16) {
+                res = true;
+            }
+        } else if (student.getProfile().getdob().getMonth() < today.getMonth()) {
+            // only if the year is greater than 16
+            if (today.getYear() - student.getProfile().getdob().getYear() >= 16) {
+                res = true;
+            }
+        }
+        if (res) {
+            System.out.println("Successful addition");
+            this.roster[this.size] = student;
+            this.size += 1;
+        }
+        return res;
+        // return false;
     }
 
     public boolean remove(Student student) {
@@ -45,6 +84,10 @@ public class Roster {
         return true;
     }
 
+    public boolean change(Profile profile, Major maj) {
+        return true;
+    }
+
     public boolean contains(Student student) {
         for (int i = 0; i < this.size; i++) {
             if (this.roster[i].equals(student)) {
@@ -56,6 +99,10 @@ public class Roster {
     }
 
     public void print() {
+        System.out.println("size of roster =" + this.size);
+        for (int i = 0; i < this.size; i++) {
+            System.out.println(this.roster[i].toString());
+        }
         // print roster sorted by profiles
     }
 
@@ -64,5 +111,10 @@ public class Roster {
 
     public void printByStanding() {
         // print roster sorted by standing
+    }
+
+    public boolean diffMajor(Major major1, Major major2) {
+
+        return false;
     }
 }
