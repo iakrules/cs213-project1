@@ -13,6 +13,8 @@ public class RosterManager {
     // CHECK THIS incomplete
     public void run() {
         try {
+            System.out.println("Roster Manager running...");
+
             Date today = new Date();
             Roster fin = new Roster();
             File texts = new File("Project1TestCases.txt");
@@ -29,7 +31,7 @@ public class RosterManager {
                     Major majors = creator(elements[4]);
                     // System.out.println("ELEMENTS" + elements[5]);
                     for (int j = 0; j < elements.length; j++) {
-                        System.out.println(elements[j]);
+                        // System.out.println(elements[j]);
                     }
                     boolean isBad = false;
                     for (int i = 0; i < elements[5].length(); i++) {
@@ -43,31 +45,44 @@ public class RosterManager {
                     }
                     Student ptr = new Student(prof, majors, Integer.parseInt(elements[5]));
                     // 0: add 1: First name 2: Last 3: DOB 4: Major 5: Credits
-                    System.out.println(ptr.toString());
+                    // System.out.println(ptr.toString());
                     fin.add(ptr);
-                    fin.print();
-                } else if (elements[0].toUpperCase().equals("P")) {
+                    System.out.println(ptr.getProfile().toString() + " added to the roster");
+                    // fin.print();
+                } else if (elements[0].equals("P")) {
 
-                } else if (elements[0].toUpperCase().equals("PS")) {
+                } else if (elements[0].equals("PS")) {
 
-                } else if (elements[0].toUpperCase().equals("PC")) {
+                } else if (elements[0].equals("PC")) {
 
-                } else if (elements[0].toUpperCase().equals("R")) {
+                } else if (elements[0].equals("R")) {
                     // 0: add 1: First name 2: Last 3: DOB
+                    if (fin.getSize() <= 0) {
+                        System.out.println("Student roster is empty!");
+                    }
                     Date place = new Date(elements[3]);
                     Profile profs = new Profile(elements[2], elements[1], place);
                     Student stud = new Student(profs);
                     fin.remove(stud);
-                } else if (elements[0].toUpperCase().equals("C")) {
+                } else if (elements[0].equals("C")) {
+                    // 0: C 1: First 2: Last 3: DOB 4: Major
 
-                } else if (elements[0].toUpperCase().equals("L")) {
+                    Major majo = creator(elements[4]);
+                    if (majo == null) {
+                        System.out.println("invalid major");
+                        continue;
+                    }
+                    Date place = new Date(elements[3]);
+                    Profile profs = new Profile(elements[2], elements[1], place);
+                    fin.changeMaj(profs, majo);
+                } else if (elements[0].equals("L")) {
 
-                } else if (elements[0].toUpperCase().equals("Q")) {
+                } else if (elements[0].equals("Q")) {
                     System.out.println("Roster Manager Terminated");
                     break;
+                } else {
+                    System.out.println(elements[0] + " is an invalid command!");
                 }
-                System.out.println(count);
-                count += 1;
             }
         } catch (FileNotFoundException e) {
 

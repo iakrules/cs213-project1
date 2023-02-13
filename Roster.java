@@ -18,7 +18,7 @@ public class Roster {
 
     private int find(Student student) {
         for (int i = 0; i < this.size; i++) {
-            if (this.roster[i].equals(student)) {
+            if (this.roster[i].getProfile().equals(student.getProfile())) {
                 return i;
             }
         }
@@ -38,48 +38,33 @@ public class Roster {
 
     public boolean add(Student student) {
         // add student to end of array
-        Date today = new Date();
-        boolean res = false;
+        if (!student.getProfile().getdob().isValid() || student.getCreditCompleted() < 0) {
+            return false;
+        }
         if (contains(student)) {
             return false;
         }
+
         if (this.size == this.roster.length) {
             grow();
-            System.out.println("size = " + this.roster.length);
         }
-        // this.roster[this.size] = student;
-        if (student.getProfile().getdob().getMonth() > today.getMonth()) {
-            if (today.getYear() - student.getProfile().getdob().getYear() > 16) {
-                res = true;
-            }
-        } else if (student.getProfile().getdob().getMonth() == today.getMonth()) {
-            if (today.getDay() >= student.getProfile().getdob().getDay()) {
-                if (today.getYear() - student.getProfile().getdob().getYear() >= 16) {
-                    res = true;
-                }
-            } else if (today.getYear() - student.getProfile().getdob().getYear() > 16) {
-                res = true;
-            }
-        } else if (student.getProfile().getdob().getMonth() < today.getMonth()) {
-            // only if the year is greater than 16
-            if (today.getYear() - student.getProfile().getdob().getYear() >= 16) {
-                res = true;
-            }
-        }
-        if (res) {
+        if (student.getProfile().getdob().checkSixteen()) {
             System.out.println("Successful addition");
             this.roster[this.size] = student;
             this.size += 1;
         }
-        return res;
+        return false;
+        // return res;
         // return false;
     }
 
     public boolean remove(Student student) {
         int pos = this.find(student);
         if (pos == -1) {
+            System.out.println("Student not in Roster!");
             return false;
         }
+
         for (int i = pos; i < this.size - 1; i++) {
             this.roster[i] = this.roster[i + 1];
         }
@@ -113,14 +98,30 @@ public class Roster {
     }
 
     public void printBySchoolMajor() {
+
     } // print roster sorted by school major
 
     public void printByStanding() {
         // print roster sorted by standing
     }
 
-    public boolean diffMajor(Major major1, Major major2) {
+    public boolean changeMaj(Profile prof, Major maj) {
+        Student stud = new Student(prof);
+        int pos = this.find(stud);
+        if (pos != -1) {
+            System.out.println(this.roster[pos].toString());
+        }
+        if (pos == -1) {
+            System.out.println("Changemaj fail: student not in array");
+            return false;
+        } else {
+            this.roster[pos].setMajor(maj);
+            System.out.println(this.roster[pos].toString());
+            return true;
+        }
+    }
 
-        return false;
+    public int getSize() {
+        return this.size;
     }
 }

@@ -23,24 +23,6 @@ public class Profile implements Comparable<Profile> {
     }
 
     /**
-     * Public get method for last name variable.
-     *
-     * @return last name as a string.
-     */
-    public String getlname() {
-        return this.lname;
-    }
-
-    /**
-     * Public get method for first name variable.
-     *
-     * @return first name as a string.
-     */
-    public String getfname() {
-        return this.fname;
-    }
-
-    /**
      * Public get method for date of birth variable.
      *
      * @return date of birth as a date.

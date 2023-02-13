@@ -50,4 +50,24 @@ public class Student {
     public Profile getProfile() {
         return this.profile;
     }
+
+    public int getCreditCompleted() {
+        return this.creditCompleted;
+    }
+
+    public boolean setMajor(Major maj) {
+        if (validMaj(maj)) {
+            this.major = maj;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean validMaj(Major maj) {
+        if (maj.equals("CS") || maj.equals("BAIT") || maj.equals("ITI") || maj.equals("EE") || maj.equals("MATH")) {
+            return true;
+        }
+        System.out.println("invalid major");
+        return false;
+    }
 }
