@@ -169,6 +169,38 @@ public class Date implements Comparable<Date> {
     }
 
     /**
+     * Public get method for year variable.
+     * @return year as an integer.
+     */
+    public int getYear() {
+        return this.year;
+    }
+
+    /**
+     * Public get method for month variable.
+     * @return month as an integer.
+     */
+    public int getMonth() {
+        return this.month;
+    }
+
+    /**
+     * Public get method for day variable.
+     * @return day as an integer.
+     */
+    public int getDay() {
+        return this.day;
+    }
+
+    /**
+     * Public get method for date as a string.
+     * @return date as a string.
+     */
+    public String getDateString() {
+        return this.inDate;
+    }
+
+    /**
      * Returns string equivalent of the inputted date.
      * Checks if day or month is a single digit date and adds padding accordingly to
      * equal mm/dd/yyyy format.
