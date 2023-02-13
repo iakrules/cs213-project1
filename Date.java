@@ -1,8 +1,7 @@
 import java.util.Calendar;
 
 /**
- * First, a single, very descriptive sentence describing the class.
- * Then, additional lines of description to elaborate the details if necessary.
+ * Defines the properties of a Date object.
  *
  * @author Ishaan Keswani, Akhil Thalasila
  */

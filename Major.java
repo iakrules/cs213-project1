@@ -1,6 +1,7 @@
 /**
- * First, a single, very descriptive sentence describing the class.
- * Then, additional lines of description to elaborate the details if necessary.
+ * Contains all majors with their corresponding class codes and schools.
+ * Values are called using the following format:
+ * "Major.<SUBJECT>.<CODE/SCHOOL>".
  *
  * @author Ishaan Keswani, Akhil Thalasila
  */

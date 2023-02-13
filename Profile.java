@@ -1,6 +1,6 @@
 /**
- * First, a single, very descriptive sentence describing the class.
- * Then, additional lines of description to elaborate the details if necessary.
+ * Defines the profile of a student.
+ * Creates first and last names, date of birth of student.
  *
  * @author Ishaan Keswani, Akhil Thalasila
  */
@@ -9,17 +9,63 @@ public class Profile implements Comparable<Profile> {
     private String fname;
     private Date dob; // use the Date class described in (f)
 
+    /**
+     * Constuctor for Profile class that creates an object with given parameters.
+     *
+     * @param lname last name of the student as a string.
+     * @param fname first name of the student as a string.
+     * @param dob   date of birth of the student as a date.
+     */
     public Profile(String lname, String fname, Date dob) {
         this.lname = lname;
         this.fname = fname;
         this.dob = dob;
     }
 
-    @Override
-    public String toString() {
-        return this.lname + "::" + this.fname + "::" + this.dob.getDateString();
+    /**
+     * Public get method for last name variable.
+     *
+     * @return last name as a string.
+     */
+    public String getlname() {
+        return this.lname;
     }
 
+    /**
+     * Public get method for first name variable.
+     *
+     * @return first name as a string.
+     */
+    public String getfname() {
+        return this.fname;
+    }
+
+    /**
+     * Public get method for date of birth variable.
+     *
+     * @return date of birth as a date.
+     */
+    public Date getdob() {
+        return this.dob;
+    }
+
+    /**
+     * Returns string equivalent of the profile.
+     *
+     * @return profile in a string with the following format: "[first name] [last
+     *         name] [dob]".
+     */
+    @Override
+    public String toString() {
+        return this.fname + " " + this.lname + " " + this.dob.getDateString();
+    }
+
+    /**
+     * Compares object profile with the given profile.
+     *
+     * @param obj String with inputted profile that is being compared.
+     * @return true of both object profiles are equal, false otherwise.
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Profile) {
@@ -32,7 +78,13 @@ public class Profile implements Comparable<Profile> {
         return false;
     }
 
-    // CHECK THIS i think i did this wrong
+    /**
+     * Compares two object profiles to each other.
+     *
+     * @param newProfile the object to be compared.
+     * @return 1 if the profile is "greater", -1 if the profile is "lesser" to
+     *         compared profile
+     */
     @Override
     public int compareTo(Profile newProfile) {
         if (this.lname != newProfile.lname) {
@@ -50,17 +102,4 @@ public class Profile implements Comparable<Profile> {
         }
         return -1;
     }
-
-    public String getlname() {
-        return this.lname;
-    }
-
-    public String getfname() {
-        return this.fname;
-    }
-
-    public Date getdob() {
-        return this.dob;
-    }
-
 }
