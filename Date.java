@@ -33,28 +33,39 @@ public class Date implements Comparable<Date> {
     private static final int CENTENNIAL = 100;
     private static final int QUATERCENTENNIAL = 400;
 
+    /**
+     * Creates an object with today's date without parameters.
+     * Uses Calendar class to get date.
+     */
     public Date() {
-        // create an object with today’s date (see Calendar class)
-        Calendar now = Calendar.getInstance();
-        this.year = now.get(Calendar.YEAR);
-        this.month = ((now.get(Calendar.MONTH)) + 1);
-        this.day = now.get(Calendar.DAY_OF_MONTH);
+        Calendar today = Calendar.getInstance();
+        this.year = today.get(Calendar.YEAR);
+        this.month = ((today.get(Calendar.MONTH)) + 1); // months begin at 0, add 1 to adjust
+        this.day = today.get(Calendar.DAY_OF_MONTH);
     }
 
+    /**
+     * Creates an object with values from the inputted String.
+     *
+     * @param date Inputted string containing date in mm/dd/yyyy format.
+     */
     public Date(String date) {
-        // take “mm/dd/yyyy” and create a Date object
-        String inDate[] = date.split("/");
+        String inDate[] = date.split("/", 3); // limits split to 3
         this.month = Integer.parseInt(inDate[0]);
         this.day = Integer.parseInt(inDate[1]);
         this.year = Integer.parseInt(inDate[2]);
         this.inDate = date;
     }
 
+    /**
+     * Checks if date is a valid calendar date.
+     *
+     * @return true if date is valid, false otherwise.
+     */
     public boolean isValid() {
-        // check if a date is a valid calendar date
-        boolean validBounds = this.withinBounds();
-        boolean validDay = this.beforeToday();
-        boolean validDinM = this.daysInMonth();
+        boolean validBounds = this.withinBounds(); // uses method to check if date is within bounds
+        boolean validDay = this.beforeToday(); // uses method to check if date is before today
+        boolean validDinM = this.daysInMonth(); // uses method to check if date has correct amount of days for month
 
         if (validBounds && validDay && validDinM)
             return true;
@@ -62,6 +73,11 @@ public class Date implements Comparable<Date> {
             return false;
     }
 
+    /**
+     * Private method that checks date is within bounds.
+     *
+     * @return true if date is within bounds, false otherwise.
+     */
     private boolean withinBounds() {
         if (this.year < MINY || this.year > MAXY) {
             return false;
@@ -75,19 +91,30 @@ public class Date implements Comparable<Date> {
         return true;
     }
 
+    /**
+     * Private method that checks date is before today.
+     *
+     * @return true if date is before today, false otherwise.
+     */
     private boolean beforeToday() {
-        if (this.year < MINY || this.year > MAXY) {
-            return false;
-        }
-        if (this.month > DEC || this.month < JAN) {
-            return false;
-        }
-        if (this.day > MAXDINM || this.day < MINDINM) {
-            return false;
+        Date today = new Date();
+        if (this.year == today.year) {
+            if (this.month > today.month) {
+                return false;
+            } else if (this.month == today.month) {
+                if (this.day > today.day) {
+                    return false;
+                }
+            }
         }
         return true;
     }
 
+    /**
+     * Private method that checks date has correct amount of days for month.
+     *
+     * @return true if date has correct amount of days for month, false otherwise.
+     */
     private boolean daysInMonth() {
         if (this.day == MAXDINM) {
             if (this.month != JAN && this.month != MAR && this.month != MAY && this.month != JUL && this.month != AUG
@@ -101,11 +128,16 @@ public class Date implements Comparable<Date> {
             }
         }
         if (this.day == DINLM && this.month == FEB) {
-            return this.leapCheck();
+            return this.leapCheck(); // uses leapCheck to check if year is a leap year
         }
         return true;
     }
 
+    /**
+     * Private method that checks if given year is a leap year.
+     *
+     * @return true if year is a leap year, false otherwise.
+     */
     private boolean leapCheck() {
         if (this.year % QUADRENNIAL == 0) {
             if (this.year % CENTENNIAL == 0) {
@@ -121,48 +153,53 @@ public class Date implements Comparable<Date> {
         return false;
     }
 
+    /**
+     * Private method that checks if date is more than 16 years ago.
+     *
+     * @return true if year is more than 16 years ago, false otherwise.
+     */
     public boolean checkSixteen() {
         int validAge = 16;
         Date today = new Date();
         today.year = today.year - validAge;
 
-        if (this.compareTo(today) <= 0)
+        if (this.compareTo(today) <= 0) // if difference is equal to 16 years or less, return true
             return true;
         return false;
     }
 
-    public int getYear() {
-        return this.year;
-    }
-
-    public int getMonth() {
-        return this.month;
-    }
-
-    public int getDay() {
-        return this.day;
-    }
-
-    public String getDateString() {
-        return this.inDate;
-    }
-
+    /**
+     * Returns string equivalent of the inputted date.
+     * Checks if day or month is a single digit date and adds padding accordingly to
+     * equal mm/dd/yyyy format.
+     *
+     * @return a string formatted as mm/dd/yyyy.
+     */
     @Override
     public String toString() {
         String MandD = "";
-        String pad = "0";
+        String padded = "0";
 
-        if (this.month < 10)
-            MandD += pad + this.month + "/";
-        else
+        if (this.month < 10) {
+            MandD += padded + this.month + "/";
+        } else {
             MandD += this.month + "/";
-        if (this.day < 10)
-            MandD += pad + this.day;
-        else
+        }
+
+        if (this.day < 10) {
+            MandD += padded + this.day;
+        } else {
             MandD += this.day;
+        }
         return MandD + "/" + this.year;
     }
 
+    /**
+     * Compares object Date with the given object.
+     *
+     * @param obj String with inputted date in mm/dd/yyyy format.
+     * @return true of both objects are the same date, false otherwise.
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Date) {
@@ -170,12 +207,19 @@ public class Date implements Comparable<Date> {
             boolean newMonth = date.month == this.month;
             boolean newDay = date.day == this.day;
             boolean newYear = date.year == this.year;
-            return (newMonth && newDay && newYear);
+            return (newMonth && newDay && newYear); // returns matching date.
         }
         return false;
     }
 
-    // CHECK THIS
+    /**
+     * Compares two mm, dd, yyy using the Date objects.
+     *
+     * @param newDate the object to be compared.
+     * @return 0 if dates are equal, -1 if date is before
+     *         that of the represented date, and 1 if the date is
+     *         after that of the represented date.
+     */
     @Override
     public int compareTo(Date newDate) {
         if (this.year > newDate.year) {
@@ -191,6 +235,6 @@ public class Date implements Comparable<Date> {
                 }
             }
         }
-        return -1;
+        return -1; // returns before represented date after checking
     }
 }
