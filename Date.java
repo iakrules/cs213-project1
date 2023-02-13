@@ -169,6 +169,7 @@ public class Date implements Comparable<Date> {
 
     /**
      * Public get method for year variable.
+     *
      * @return year as an integer.
      */
     public int getYear() {
@@ -177,6 +178,7 @@ public class Date implements Comparable<Date> {
 
     /**
      * Public get method for month variable.
+     *
      * @return month as an integer.
      */
     public int getMonth() {
@@ -185,6 +187,7 @@ public class Date implements Comparable<Date> {
 
     /**
      * Public get method for day variable.
+     *
      * @return day as an integer.
      */
     public int getDay() {
