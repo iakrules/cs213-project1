@@ -57,7 +57,7 @@ public class Profile implements Comparable<Profile> {
      */
     @Override
     public String toString() {
-        return this.fname + " " + this.lname + " " + this.dob.getDateString();
+        return this.fname + " " + this.lname + " " + this.dob.toString();
     }
 
     /**
@@ -96,7 +96,7 @@ public class Profile implements Comparable<Profile> {
                 if (this.dob != newProfile.dob) {
                     return 1;
                 } else if (this.dob == newProfile.dob) {
-                    return 0;
+                    return 0; // profiles are same
                 }
             }
         }
