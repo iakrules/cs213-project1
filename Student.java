@@ -1,10 +1,9 @@
-/*
+/**
+ * First, a single, very descriptive sentence describing the class.
+ * Then, additional lines of description to elaborate the details if necessary.
  *
- * @author Ishaan Keswani
- * @author
- *
+ * @author Ishaan Keswani, Akhil Thalasila
  */
-
 public class Student {
     private Profile profile;
     private Major major; // Major is an enum type

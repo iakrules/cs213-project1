@@ -1,12 +1,11 @@
 import java.util.Calendar;
 
-/*
- * 
- * @author Ishaan Keswani
- * @author 
- * 
+/**
+ * First, a single, very descriptive sentence describing the class.
+ * Then, additional lines of description to elaborate the details if necessary.
+ *
+ * @author Ishaan Keswani, Akhil Thalasila
  */
-
 public class Date implements Comparable<Date> {
     private int year;
     private int month;

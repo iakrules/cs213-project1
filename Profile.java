@@ -1,10 +1,9 @@
-/*
- * 
- * @author Ishaan Keswani
- * @author
- * 
+/**
+ * First, a single, very descriptive sentence describing the class.
+ * Then, additional lines of description to elaborate the details if necessary.
+ *
+ * @author Ishaan Keswani, Akhil Thalasila
  */
-
 public class Profile implements Comparable<Profile> {
     private String lname;
     private String fname;

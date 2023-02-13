@@ -1,3 +1,9 @@
+/**
+ * First, a single, very descriptive sentence describing the class.
+ * Then, additional lines of description to elaborate the details if necessary.
+ *
+ * @author Ishaan Keswani, Akhil Thalasila
+ */
 public class Roster {
     private Student[] roster;
     private int size;
