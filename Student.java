@@ -18,6 +18,12 @@ public class Student {
         this.creditCompleted = credit;
     }
 
+    public Student(Profile profile) {
+        this.profile = profile;
+        this.major = Major.CS;
+        this.creditCompleted = 0;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Student) {
@@ -29,8 +35,18 @@ public class Student {
         return false;
     }
 
-    // CHECK THIS missing toString, compareTo methods
+    public String toString() {
+        String res = this.profile.toString();
+        res += this.major;
+        res += String.valueOf(this.creditCompleted);
+        return res;
+    }
 
+    // CHECK THIS missing toString, compareTo methods
+    // public Student compareTo(Student i) {
+    //
+    // return "";
+    // }
     // CHECK THIS missing get methods
     public Profile getProfile() {
         return this.profile;

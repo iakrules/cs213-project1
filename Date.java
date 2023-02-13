@@ -51,13 +51,13 @@ public class Date implements Comparable<Date> {
         this.inDate = date;
     }
 
-    // CHECK THIS missing isValid idk how to do this part in code
     public boolean isValid() {
         // check if a date is a valid calendar date
         boolean validBounds = this.withinBounds();
         boolean validDay = this.beforeToday();
+        boolean validDinM = this.daysInMonth();
 
-        if (validBounds && validDay)
+        if (validBounds && validDay && validDinM)
             return true;
         else
             return false;
@@ -89,7 +89,48 @@ public class Date implements Comparable<Date> {
         return true;
     }
 
-    // TO DO STILL: check if leap year, make days in m
+    private boolean daysInMonth() {
+        if (this.day == MAXDINM) {
+            if (this.month != JAN && this.month != MAR && this.month != MAY && this.month != JUL && this.month != AUG
+                    && this.month != OCT && this.month != DEC) {
+                return false;
+            }
+        }
+        if (this.day == DINM) {
+            if (this.month == FEB) {
+                return false;
+            }
+        }
+        if (this.day == DINLM && this.month == FEB) {
+            return this.leapCheck();
+        }
+        return true;
+    }
+
+    private boolean leapCheck() {
+        if (this.year % QUADRENNIAL == 0) {
+            if (this.year % CENTENNIAL == 0) {
+                if (this.year % QUATERCENTENNIAL == 0) {
+                    return true;
+                }
+            } else {
+                return true;
+            }
+        } else {
+            return false;
+        }
+        return false;
+    }
+
+    public boolean checkSixteen() {
+        int validAge = 16;
+        Date today = new Date();
+        today.year = today.year - validAge;
+
+        if (this.compareTo(today) <= 0)
+            return true;
+        return false;
+    }
 
     public int getYear() {
         return this.year;
@@ -107,7 +148,35 @@ public class Date implements Comparable<Date> {
         return this.inDate;
     }
 
-    // CHECK THIS missing toString, equals methods
+    @Override
+    public String toString() {
+        String MandD = "";
+        String pad = "0";
+
+        if (this.month < 10)
+            MandD += pad + this.month + "/";
+        else
+            MandD += this.month + "/";
+        if (this.day < 10)
+            MandD += pad + this.day;
+        else
+            MandD += this.day;
+        return MandD + "/" + this.year;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Date) {
+            Date date = (Date) obj;
+            boolean newMonth = date.month == this.month;
+            boolean newDay = date.day == this.day;
+            boolean newYear = date.year == this.year;
+            return (newMonth && newDay && newYear);
+        }
+        return false;
+    }
+
+    // CHECK THIS
     @Override
     public int compareTo(Date newDate) {
         if (this.year > newDate.year) {
