@@ -1,6 +1,5 @@
 /**
- * First, a single, very descriptive sentence describing the class.
- * Then, additional lines of description to elaborate the details if necessary.
+ * Driver class used to run Project 1.
  *
  * @author Ishaan Keswani, Akhil Thalasila
  */

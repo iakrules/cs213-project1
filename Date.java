@@ -204,20 +204,8 @@ public class Date implements Comparable<Date> {
     @Override
     public String toString() {
         String MandD = "";
-        String padded = "0";
-
-        if (this.month < 10) {
-            MandD += padded + this.month + "/";
-        } else {
-            MandD += this.month + "/";
-        }
-
-        if (this.day < 10) {
-            MandD += padded + this.day;
-        } else {
-            MandD += this.day;
-        }
-        return MandD + "/" + this.year;
+        MandD += this.month + "/" + this.day + "/" + this.year;
+        return MandD;
     }
 
     /**
@@ -262,5 +250,21 @@ public class Date implements Comparable<Date> {
             }
         }
         return -1; // returns before date
+    }
+
+    public static void main(String[] args) {
+        // invalid dates
+        String[] invalid = new String[] { "2/29/2003", "4/31" + "/2003", "3/32/2003", "-1/31/2003", "5/18/2030",
+                "9/24/2002", "2/29/2004" };
+        for (int i = 0; i < invalid.length; i++) {
+            Date dob = new Date(invalid[i]);
+            if (!dob.isValid()) { // checks valid date of birth
+                System.out.println("DOB invalid: " + dob + " not a valid calendar " + "date!");
+            } else if (!dob.checkSixteen()) { // checks if over 16 years old
+                System.out.println("DOB invalid: " + dob + " younger than 16 years old.");
+            } else {
+                System.out.println(dob + " is a valid date.");
+            }
+        }
     }
 }
